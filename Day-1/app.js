@@ -32,7 +32,7 @@ fetchData()
     .catch(error => {
         console.error(error);
     });
-
+``
 // using async await 
 function fetchData() {
     return new Promise((resolve, reject) => {
