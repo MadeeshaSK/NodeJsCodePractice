@@ -106,3 +106,29 @@ try {
     console.error(err);
 }
 console.log('read and write complete');
+
+//OS modules
+
+const os = require('os');
+console.log('CPU info', os.cpus());
+console.log('Total memory', os.totalmem());
+console.log('Free memory', os.freemem());
+console.log('Uptime', os.uptime());
+console.log('User info', os.userInfo());
+console.log('Platform', os.platform());
+console.log('Release', os.release());
+console.log('Type', os.type());
+console.log('Arch', os.arch());
+console.log('Network Interfaces', os.networkInterfaces());
+console.log('Hostname', os.hostname());
+console.log('Load Average', os.loadavg());
+console.log('Endianness', os.endianness());
+console.log('Constants', os.constants);
+console.log('OS version', os.version());
+console.log('EOL', os.EOL);
+console.log('Homedir', os.homedir());
+console.log('Tmpdir', os.tmpdir());
+
+// web client request from API server (using node), it response
+
+// http module
