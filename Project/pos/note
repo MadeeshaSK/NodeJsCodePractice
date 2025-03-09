@@ -1,0 +1,29 @@
+/* 
+open cmd in the project folder and run the following command
+ npm init 
+ then initializ properties of the project
+
+create sturcture of the project as follows
+ model folder
+ controller folder
+ route folder
+ index.js file
+ then create all model files in model folder
+
+ then open terminal and install dependencies
+    npm install express - as it is a web framework for nodejs
+    npm install mongoose - as it is a mongodb object modeling tool(mapper)
+    npm install body-parser - as it is a middleware to parse incoming request bodies
+    npm install nodemon - as it is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected
+    npm install dotenv - as it is a zero-dependency module that loads environment variables from a .env file into process.env
+    npm install jsonwebtoken - as it is a compact, URL-safe means of representing claims to be transferred between two parties (security)
+    npm install bcryptjs - as it is a library to help you hash passwords (security)
+    all in one : npm install express mongoose body-parser nodemon dotenv jsonwebtoken bcryptjs
+
+    then create a .env file 
+    create controllers and route files
+
+    npm i nodemon -g
+    
+
+*/
