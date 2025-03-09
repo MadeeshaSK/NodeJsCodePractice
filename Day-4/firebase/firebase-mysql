@@ -1,0 +1,52 @@
+/*
+
+//////////// firebase with nodejs
+
+firebase is a google product which is used to store data in cloud,
+It is a NoSQL database.(JSON format),
+npm init ,
+press enter sevaral times,
+npm install express body-parser firebase-admin,
+npm i nodemon ,then auto refresh server,
+npm i dotenv,
+create index.js file,
+create firebase project in website,
+project settings -> service accounts -> copy code,
+add it to index.js 
+const admin = require("firebase-admin");
+
+const serviceAccount = require("path/to/serviceAccountKey.json");
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount)
+});
+genarate privatekey and put it in to project and set it path in code,
+create a database in firebase,
+built -> firestore database -> create database -> start in test mode,
+add database url in code,
+const db = admin.firestore();
+const app = express();
+app.use(bodyParser.json());
+const collection = 'customers';
+then implement the code,
+
+to run project type in cmd "nodemon" and press enter,
+
+///////////////// mysql with nodejs
+
+npm uninstall mysql,
+npm install mysql2,
+create a database in mysql,
+
+CREATE DATABASE test1;
+USE test1;
+CREATE TABLE IF NOT EXISTS customer(
+    id VARCHAR(45) PRIMARY KEY,
+    name VARCHAR(45) NOT NULL DEFAULT "unknown",
+    address VARCHAR(45) NOT NULL,
+    salary DECIMAL(10, 2)
+);
+SHOW TABLES;
+DESC customer;
+
+*/
