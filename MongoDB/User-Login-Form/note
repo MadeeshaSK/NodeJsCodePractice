@@ -1,0 +1,534 @@
+/*
+
+Feature        |           SQL(RDBMS)            |          NoSQL
+-------------------------------------------------------------------
+# Data Model   | Table-based (rows and columns)  | Document-based (collection)
+# Schema       | Fixed (static)                  | dynamic
+# Data relation| Strongly related                | not related more
+# Performance  | High(but slow)                  | Low(but fast)
+# Use cases    | Banking/ERP(when query complex) | Realtime analysis/ IoT /Mobile App(when data set complex)
+# Examples     | MySQL                           | MongoDB
+
+ERP(enterprise resource planning) - big system
+
+-------------------------------------------------------------------------------------------------------
+
+
+Certainly! Below is a comprehensive list of MongoDB commands covering various areas such as database operations, collection operations, CRUD operations, indexing, aggregation, and more. You can save this as a single file (e.g., `mongodb_commands.txt`) for reference.
+
+```plaintext
+# MongoDB Commands Cheat Sheet
+
+## Database Operations
+
+1. **Show Databases**: List all databases.
+   ```bash
+   show dbs
+   ```
+
+2. **Use Database**: Switch to a specific database.
+   ```bash
+   use <database_name>
+   ```
+
+3. **Create Database**: MongoDB creates a database when you first store data in it.
+   ```bash
+   use <new_database_name>
+   ```
+
+4. **Drop Database**: Delete a database.
+   ```bash
+   db.dropDatabase()
+   ```
+
+## Collection Operations
+
+5. **Show Collections**: List all collections in the current database.
+   ```bash
+   show collections
+   ```
+
+6. **Create Collection**: Create a new collection.
+   ```bash
+   db.createCollection("<collection_name>")
+   ```
+
+7. **Drop Collection**: Delete a collection.
+   ```bash
+   db.<collection_name>.drop()
+   ```
+
+## CRUD Operations
+
+8. **Insert Document**: Insert a single document into a collection.
+   ```bash
+   db.<collection_name>.insertOne({ key: "value" })
+   ```
+
+9. **Insert Multiple Documents**: Insert multiple documents into a collection.
+   ```bash
+   db.<collection_name>.insertMany([{ key1: "value1" }, { key2: "value2" }])
+   ```
+
+10. **Find Documents**: Retrieve documents from a collection.
+    ```bash
+    db.<collection_name>.find()
+    ```
+
+11. **Find with Filter**: Retrieve documents that match a specific condition.
+    ```bash
+    db.<collection_name>.find({ key: "value" })
+    ```
+
+12. **Find One Document**: Retrieve a single document that matches a condition.
+    ```bash
+    db.<collection_name>.findOne({ key: "value" })
+    ```
+
+13. **Update Document**: Update a single document that matches a condition.
+    ```bash
+    db.<collection_name>.updateOne({ key: "value" }, { $set: { new_key: "new_value" } })
+    ```
+
+14. **Update Multiple Documents**: Update all documents that match a condition.
+    ```bash
+    db.<collection_name>.updateMany({ key: "value" }, { $set: { new_key: "new_value" } })
+    ```
+
+15. **Replace Document**: Replace a document entirely.
+    ```bash
+    db.<collection_name>.replaceOne({ key: "value" }, { new_key: "new_value" })
+    ```
+
+16. **Delete Document**: Delete a single document that matches a condition.
+    ```bash
+    db.<collection_name>.deleteOne({ key: "value" })
+    ```
+
+17. **Delete Multiple Documents**: Delete all documents that match a condition.
+    ```bash
+    db.<collection_name>.deleteMany({ key: "value" })
+    ```
+
+## Indexing
+
+18. **Create Index**: Create an index on a field.
+    ```bash
+    db.<collection_name>.createIndex({ key: 1 })
+    ```
+
+19. **List Indexes**: List all indexes on a collection.
+    ```bash
+    db.<collection_name>.getIndexes()
+    ```
+
+20. **Drop Index**: Drop an index by name.
+    ```bash
+    db.<collection_name>.dropIndex("index_name")
+    ```
+
+21. **Drop All Indexes**: Drop all indexes on a collection.
+    ```bash
+    db.<collection_name>.dropIndexes()
+    ```
+
+## Aggregation
+
+22. **Aggregate**: Perform aggregation operations on a collection.
+    ```bash
+    db.<collection_name>.aggregate([
+      { $match: { key: "value" } },
+      { $group: { _id: "$key", total: { $sum: 1 } } }
+    ])
+    ```
+
+23. **Count Documents**: Count the number of documents in a collection.
+    ```bash
+    db.<collection_name>.countDocuments()
+    ```
+
+24. **Distinct Values**: Get distinct values for a field.
+    ```bash
+    db.<collection_name>.distinct("key")
+    ```
+
+## Query Operators
+
+25. **Comparison Operators**: Use comparison operators like `$eq`, `$ne`, `$gt`, `$lt`, `$gte`, `$lte`.
+    ```bash
+    db.<collection_name>.find({ key: { $gt: 10 } })
+    ```
+
+26. **Logical Operators**: Use logical operators like `$and`, `$or`, `$not`, `$nor`.
+    ```bash
+    db.<collection_name>.find({ $and: [{ key1: "value1" }, { key2: "value2" }] })
+    ```
+
+27. **Element Operators**: Use element operators like `$exists`, `$type`.
+    ```bash
+    db.<collection_name>.find({ key: { $exists: true } })
+    ```
+
+28. **Array Operators**: Use array operators like `$in`, `$nin`, `$all`, `$elemMatch`.
+    ```bash
+    db.<collection_name>.find({ key: { $in: ["value1", "value2"] } })
+    ```
+
+## Text Search
+
+29. **Create Text Index**: Create a text index for full-text search.
+    ```bash
+    db.<collection_name>.createIndex({ key: "text" })
+    ```
+
+30. **Text Search**: Perform a text search on a collection.
+    ```bash
+    db.<collection_name>.find({ $text: { $search: "search_term" } })
+    ```
+
+## Geospatial Queries
+
+31. **Create Geospatial Index**: Create a 2dsphere index for geospatial queries.
+    ```bash
+    db.<collection_name>.createIndex({ location: "2dsphere" })
+    ```
+
+32. **Geospatial Query**: Find documents near a specific location.
+    ```bash
+    db.<collection_name>.find({
+      location: {
+        $near: {
+          $geometry: { type: "Point", coordinates: [longitude, latitude] },
+          $maxDistance: 1000
+        }
+      }
+    })
+    ```
+
+## Transactions
+
+33. **Start Session**: Start a session for transactions.
+    ```bash
+    session = db.getMongo().startSession()
+    ```
+
+34. **Start Transaction**: Start a transaction within a session.
+    ```bash
+    session.startTransaction()
+    ```
+
+35. **Commit Transaction**: Commit a transaction.
+    ```bash
+    session.commitTransaction()
+    ```
+
+36. **Abort Transaction**: Abort a transaction.
+    ```bash
+    session.abortTransaction()
+    ```
+
+## User Management
+
+37. **Create User**: Create a new user with specific roles.
+    ```bash
+    db.createUser({
+      user: "username",
+      pwd: "password",
+      roles: [{ role: "readWrite", db: "database_name" }]
+    })
+    ```
+
+38. **Update User**: Update an existing user's roles or password.
+    ```bash
+    db.updateUser("username", {
+      pwd: "new_password",
+      roles: [{ role: "read", db: "database_name" }]
+    })
+    ```
+
+39. **Delete User**: Delete a user.
+    ```bash
+    db.dropUser("username")
+    ```
+
+40. **Show Users**: List all users in the current database.
+    ```bash
+    db.getUsers()
+    ```
+
+## Backup and Restore
+
+41. **Backup Database**: Use `mongodump` to backup a database.
+    ```bash
+    mongodump --db <database_name> --out /backup/path
+    ```
+
+42. **Restore Database**: Use `mongorestore` to restore a database.
+    ```bash
+    mongorestore --db <database_name> /backup/path/<database_name>
+    ```
+
+## Miscellaneous
+
+43. **Current Database**: Show the current database.
+    ```bash
+    db
+    ```
+
+44. **Server Status**: Get the status of the MongoDB server.
+    ```bash
+    db.serverStatus()
+    ```
+
+45. **Current Operation**: View current operations.
+    ```bash
+    db.currentOp()
+    ```
+
+46. **Kill Operation**: Kill a specific operation by its ID.
+    ```bash
+    db.killOp(opid)
+    ```
+
+47. **Explain Query**: Analyze the performance of a query.
+    ```bash
+    db.<collection_name>.find({ key: "value" }).explain()
+    ```
+
+48. **Replica Set Status**: Check the status of a replica set.
+    ```bash
+    rs.status()
+    ```
+
+49. **Sharding Status**: Check the status of sharding.
+    ```bash
+    sh.status()
+    ```
+
+50. **Enable Sharding**: Enable sharding on a database.
+    ```bash
+    sh.enableSharding("<database_name>")
+    ```
+
+51. **Shard Collection**: Shard a collection.
+    ```bash
+    sh.shardCollection("<database_name>.<collection_name>", { key: 1 })
+    ```
+
+52. **Balancer Status**: Check the status of the shard balancer.
+    ```bash
+    sh.getBalancerState()
+    ```
+
+53. **Enable Balancer**: Enable the shard balancer.
+    ```bash
+    sh.startBalancer()
+    ```
+
+54. **Disable Balancer**: Disable the shard balancer.
+    ```bash
+    sh.stopBalancer()
+    ```
+
+55. **View Logs**: View MongoDB logs.
+    ```bash
+    show logs
+    ```
+
+56. **Set Log Level**: Set the log level for a specific component.
+    ```bash
+    db.setLogLevel(2, "query")
+    ```
+
+57. **View Profiling Level**: Check the current profiling level.
+    ```bash
+    db.getProfilingStatus()
+    ```
+
+58. **Set Profiling Level**: Set the profiling level.
+    ```bash
+    db.setProfilingLevel(1, 100)
+    ```
+
+59. **View Profiling Data**: View the profiling data.
+    ```bash
+    db.system.profile.find()
+    ```
+
+60. **Kill All Operations**: Kill all running operations.
+    ```bash
+    db.killOp("all")
+    ```
+
+```
+
+This file covers a wide range of MongoDB commands across different areas. You can use it as a quick reference guide for MongoDB operations.
+
+
+----------------------------------------------------------------------------------------------------------
+
+operators
+
+$eq - equal
+$gt - greater than
+$lt - less than
+$in
+$and
+$or
+$not
+$exists
+aggregate(advanced version of find) 
+$match
+$group
+$sum
+$project
+$sort
+$limit
+$skip
+
+
+
+
+
+-------------------------------------------------------------------------------------------------------
+
+Selecting the right database technology for a real-world application depends on various factors, including the type of data, scalability needs, consistency requirements, and the specific use case. Below are **real-world examples** of how to choose between MongoDB, MySQL, and other database technologies:
+
+---
+
+### 1. **E-Commerce Platform**
+   - **Use Case**: An e-commerce platform needs to manage product catalogs, user accounts, orders, and transactions.
+   - **Database Choice**: **MySQL** or **PostgreSQL**.
+   - **Why?**
+     - Structured data: Product information, user details, and orders are highly structured and relational.
+     - ACID compliance: Transactions (e.g., payments, inventory updates) require strong consistency.
+     - Complex queries: SQL is ideal for querying relationships (e.g., "Find all orders by a user in the last 30 days").
+   - **Example**: Amazon, Shopify.
+
+---
+
+### 2. **Social Media Platform**
+   - **Use Case**: A social media app needs to store user profiles, posts, comments, and likes.
+   - **Database Choice**: **MongoDB** or **Cassandra**.
+   - **Why?**
+     - Semi-structured data: Posts and comments can have varying structures (e.g., text, images, videos).
+     - Scalability: Social media platforms need to handle high read/write throughput and scale horizontally.
+     - Flexibility: MongoDB's document model allows for easy schema evolution as features change.
+   - **Example**: Facebook, Twitter.
+
+---
+
+### 3. **IoT Data Management**
+   - **Use Case**: A smart home system collects sensor data (e.g., temperature, motion) from thousands of devices.
+   - **Database Choice**: **Time-Series Database (e.g., InfluxDB)** or **Cassandra**.
+   - **Why?**
+     - High write throughput: IoT devices generate massive amounts of time-series data.
+     - Efficient storage: Time-series databases optimize for storing and querying time-stamped data.
+     - Scalability: Cassandra can handle distributed, high-velocity data.
+   - **Example**: Smart home systems, industrial IoT.
+
+---
+
+### 4. **Content Management System (CMS)**
+   - **Use Case**: A blog or news website needs to store articles, user comments, and metadata.
+   - **Database Choice**: **MySQL** or **PostgreSQL**.
+   - **Why?**
+     - Structured content: Articles and comments have a clear schema.
+     - Relational queries: Easily fetch articles by category, author, or date.
+     - ACID compliance: Ensures data integrity for user-generated content.
+   - **Example**: WordPress, Drupal.
+
+---
+
+### 5. **Real-Time Analytics**
+   - **Use Case**: A real-time dashboard tracks user activity, clicks, and conversions.
+   - **Database Choice**: **Elasticsearch** or **Redis**.
+   - **Why?**
+     - Fast queries: Elasticsearch is optimized for full-text search and aggregations.
+     - Real-time updates: Redis is an in-memory database for low-latency data access.
+     - Scalability: Both can handle high volumes of real-time data.
+   - **Example**: Google Analytics, Mixpanel.
+
+---
+
+### 6. **Gaming Leaderboard**
+   - **Use Case**: A mobile game needs to store and update player scores in real-time.
+   - **Database Choice**: **Redis**.
+   - **Why?**
+     - Low latency: Redis is an in-memory database, ideal for real-time updates.
+     - Sorted sets: Redis provides built-in data structures for leaderboards.
+     - High throughput: Can handle millions of updates per second.
+   - **Example**: Mobile games like Clash Royale.
+
+---
+
+### 7. **Financial Transactions**
+   - **Use Case**: A banking app needs to store and process transactions securely.
+   - **Database Choice**: **PostgreSQL** or **Oracle**.
+   - **Why?**
+     - ACID compliance: Ensures data integrity for financial transactions.
+     - Strong consistency: Critical for balancing accounts and preventing fraud.
+     - Complex queries: SQL is ideal for financial reporting and analytics.
+   - **Example**: Banking apps like Chase, PayPal.
+
+---
+
+### 8. **Logging and Monitoring**
+   - **Use Case**: A system needs to store and analyze application logs for debugging and monitoring.
+   - **Database Choice**: **Elasticsearch** or **Splunk**.
+   - **Why?**
+     - Full-text search: Easily search through large volumes of log data.
+     - Scalability: Handles high volumes of log entries.
+     - Real-time analysis: Enables real-time monitoring and alerting.
+   - **Example**: DevOps tools like Datadog, ELK Stack.
+
+---
+
+### 9. **Geospatial Data**
+   - **Use Case**: A ride-sharing app needs to store and query location data for drivers and riders.
+   - **Database Choice**: **PostgreSQL (with PostGIS)** or **MongoDB**.
+   - **Why?**
+     - Geospatial queries: Both support geospatial indexing and queries (e.g., "Find drivers within 5 km").
+     - Flexibility: MongoDB's document model can store complex geospatial data.
+   - **Example**: Uber, Lyft.
+
+---
+
+### 10. **Machine Learning Data Pipeline**
+   - **Use Case**: A recommendation system needs to store user behavior data for training models.
+   - **Database Choice**: **Cassandra** or **HBase**.
+   - **Why?**
+     - Scalability: Handles large volumes of unstructured or semi-structured data.
+     - Distributed storage: Ideal for big data pipelines.
+     - High write throughput: Supports continuous data ingestion.
+   - **Example**: Netflix, Spotify.
+
+---
+
+### Key Factors to Consider When Choosing a Database:
+1. **Data Structure**:
+   - Structured data: SQL databases (MySQL, PostgreSQL).
+   - Semi-structured/unstructured data: NoSQL databases (MongoDB, Cassandra).
+
+2. **Scalability**:
+   - Vertical scaling: SQL databases.
+   - Horizontal scaling: NoSQL databases.
+
+3. **Consistency vs. Availability**:
+   - Strong consistency: SQL databases.
+   - Eventual consistency: NoSQL databases.
+
+4. **Performance**:
+   - Low-latency: In-memory databases (Redis).
+   - High throughput: Distributed databases (Cassandra).
+
+5. **Use Case**:
+   - Transactions: SQL databases.
+   - Real-time analytics: Time-series or in-memory databases.
+   - Geospatial data: Specialized databases (PostGIS, MongoDB).
+
+By analyzing these factors, you can make an informed decision about which database technology best suits your application.
+
+
+
+*/
